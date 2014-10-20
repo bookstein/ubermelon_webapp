@@ -4,7 +4,7 @@
 <table class="table table-striped">
     <tr><th>Melon Name</th><th>Quantity</th><th>Price</th><th>Total</th></tr>
     {% for item in melon_rows %}
-    <tr><td>{{ item.common_name }}</td><td> {{ quantity[item.common_name] }} </td><td> {{  "$%.2f" | format(item.price) }}</td><td></td></tr>
+    <tr><td>{{ item.common_name }}</td><td> {{ quantity[item.common_name] }} </td><td> {{  "$%.2f" | format(item.price) }}</td><td>{{ "$%.2f" | format(quantity[item.common_name] * item.price) }}</td></tr>
     {% endfor %}
 
 </table>

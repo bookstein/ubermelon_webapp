@@ -43,14 +43,12 @@ def shopping_cart():
         print melon_rows
     
     total = 0
+
     for melon in melon_rows:
         subtotal = melon.price * quantity[melon.common_name]
         total += subtotal  
 
-    print session
 
-        #  melon = Melon(row[0], row[1], row[2], row[3], row[4], row[5],
-                  # row[6], row[7])
     return render_template("cart.html", melon_rows = melon_rows, quantity = quantity, total = total)
 
 @app.route("/add_to_cart/<int:id>")

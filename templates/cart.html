@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 {% block body %}
-{{ melon_rows }}
+
 <table class="table table-striped">
     <tr><th>Melon Name</th><th>Quantity</th><th>Price</th><th>Total</th></tr>
     {% for item in melon_rows %}
-    <tr><td>{{ item.common_name }}</td><td> {{ quantity[item.common_name] }} </td><td> {{ item.price }}</td><td></td></tr>
+    <tr><td>{{ item.common_name }}</td><td> {{ quantity[item.common_name] }} </td><td> {{  "$%.2f" | format(item.price) }}</td><td></td></tr>
     {% endfor %}
 
 </table>
-<h3>Total: $27.00</h3>
+<h3>Total: {{ "$%.2f" | format(total) }}</h3>
 <a href="/checkout" class="btn btn-large btn-primary">Check Out</a>
 {% endblock %}

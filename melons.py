@@ -33,8 +33,9 @@ def shopping_cart():
     """TODO: Display the contents of the shopping cart. The shopping cart is a
     list held in the session that contains all the melons to be added. Check
     accompanying screenshots for details."""
-    melon_rows = []
-    quantity = {}
+    # melon_rows = []
+    # quantity = {}
+    # COME BACK TO THIS PART!!!!!!
     for melon_id in session["cart"]:
         melon = model.get_melon_by_id(melon_id)
         if melon.common_name not in quantity:
@@ -59,11 +60,13 @@ def add_to_cart(id):
     Intended behavior: when a melon is added to a cart, redirect them to the
     shopping cart page, while displaying the message
     "Successfully added to cart" """
+    id = str(id)
 
     if "cart" in session:
-        session["cart"].append(id)
+        session["cart"][id] = session["cart"].get(id, 0) + 1 
     else:
-        session["cart"] = [id]
+        session["cart"] = {id: 1}
+    print session
 
     flash("Successfully added to cart")
     return redirect("/cart")

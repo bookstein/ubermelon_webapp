@@ -33,24 +33,20 @@ def shopping_cart():
     """TODO: Display the contents of the shopping cart. The shopping cart is a
     list held in the session that contains all the melons to be added. Check
     accompanying screenshots for details."""
-    # melon_rows = []
-    # quantity = {}
-    # COME BACK TO THIS PART!!!!!!
+    melon_rows = []
     for melon_id in session["cart"]:
         melon = model.get_melon_by_id(melon_id)
-        if melon.common_name not in quantity:
-            melon_rows.append(melon)
-        quantity[melon.common_name] = quantity.get(melon.common_name, 0) + 1
-        print melon_rows
+        melon_rows.append(melon)
+       
     
     total = 0
 
     for melon in melon_rows:
-        subtotal = melon.price * quantity[melon.common_name]
+        subtotal = melon.price * session["cart"][str(melon.id)]
         total += subtotal  
 
 
-    return render_template("cart.html", melon_rows = melon_rows, quantity = quantity, total = total)
+    return render_template("cart.html", melon_rows = melon_rows, total = total)
 
 @app.route("/add_to_cart/<int:id>")
 def add_to_cart(id):

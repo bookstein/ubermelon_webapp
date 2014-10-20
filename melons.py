@@ -33,7 +33,14 @@ def shopping_cart():
     """TODO: Display the contents of the shopping cart. The shopping cart is a
     list held in the session that contains all the melons to be added. Check
     accompanying screenshots for details."""
-    return render_template("cart.html")
+    melon_rows = []
+    for melon_id in session["cart"]:
+        melon = model.get_melon_by_id(melon_id)
+        melon_rows.append(melon)
+
+        #  melon = Melon(row[0], row[1], row[2], row[3], row[4], row[5],
+                  # row[6], row[7])
+    return render_template("cart.html", melon_rows = melon_rows)
 
 @app.route("/add_to_cart/<int:id>")
 def add_to_cart(id):
@@ -44,7 +51,13 @@ def add_to_cart(id):
     shopping cart page, while displaying the message
     "Successfully added to cart" """
 
-    return "Oops! This needs to be implemented!"
+    if "cart" in session:
+        session["cart"].append(id)
+    else:
+        session["cart"] = [id]
+
+    flash("Successfully added to cart")
+    return redirect("/cart")
 
 
 @app.route("/login", methods=["GET"])

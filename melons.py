@@ -34,19 +34,20 @@ def shopping_cart():
     list held in the session that contains all the melons to be added. Check
     accompanying screenshots for details."""
     melon_rows = []
-    for melon_id in session["cart"]:
-        melon = model.get_melon_by_id(melon_id)
-        melon_rows.append(melon)
-       
-    
     total = 0
 
-    for melon in melon_rows:
-        subtotal = melon.price * session["cart"][str(melon.id)]
-        total += subtotal  
-
-
+    if "cart" in session:
+        for melon_id in session["cart"]:
+            melon = model.get_melon_by_id(melon_id)
+            melon_rows.append(melon)
+            subtotal = melon.price * session["cart"][str(melon.id)]
+            total += subtotal
+    else:
+        flash("Your cart is empty.")  
+    
     return render_template("cart.html", melon_rows = melon_rows, total = total)
+
+
 
 @app.route("/add_to_cart/<int:id>")
 def add_to_cart(id):
@@ -58,10 +59,16 @@ def add_to_cart(id):
     "Successfully added to cart" """
     id = str(id)
 
-    if "cart" in session:
-        session["cart"][id] = session["cart"].get(id, 0) + 1 
-    else:
-        session["cart"] = {id: 1}
+    # if "cart" in session:
+    #     session["cart"][id] = session["cart"].get(id, 0) + 1 
+    # else:
+    #     session["cart"] = {id: 1}
+
+
+    if "cart" not in session:
+        session["cart"] = {}
+
+    session["cart"][id] = session["cart"].get(id, 0) + 1 
 
 
     flash("Successfully added to cart")
@@ -86,7 +93,7 @@ def process_login():
     customer = model.get_customer_by_email(email)
 
     if customer:
-        session["customer"] = customer
+        session["customer"] = customer # {'username': username, 'email': email}
         flash("Successfully logged in")
         return redirect("/melons")
     else:

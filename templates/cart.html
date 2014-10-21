@@ -2,9 +2,21 @@
 {% block body %}
 
 <table class="table table-striped">
-    <tr><th>Melon Name</th><th>Quantity</th><th>Price</th><th>Total</th></tr>
+    <tr>
+        <th>Melon Name</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Total</th>
+    </tr>
     {% for item in melon_rows %}
-    <tr><td>{{ item.common_name }}</td><td> {{ session["cart"][ "%s" |format(item.id)] }} </td><td> {{  "$%.2f" | format(item.price) }}</td><td>{{ "$%.2f" | format(session["cart"][ "%s" |format(item.id)]*item.price) }}</td></tr>
+        <tr>
+            <td>{{ item.common_name }}</td>
+            <td> {{ session["cart"][ "%s" |format(item.id)] }} </td>
+            <td> {{  "$%.2f" | format(item.price) }}</td>
+            <td>
+                {{ "$%.2f" | format(session["cart"][ "%s" |format(item.id)]*item.price) }}  
+            </td>
+        </tr>
     {% endfor %}
 
 </table>

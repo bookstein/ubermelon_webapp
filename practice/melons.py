@@ -24,7 +24,7 @@ def show_melon(id):
     """This page shows the details of a given melon, as well as giving an
     option to buy the melon."""
     melon = model.get_melon_by_id(id)
-    print melon
+    # print melon
     return render_template("melon_details.html",
                   display_melon = melon)
 
@@ -69,7 +69,20 @@ def show_login():
 def process_login():
     """TODO: Receive the user's login credentials located in the 'request.form'
     dictionary, look up the user, and store them in the session."""
-    return "Oops! This needs to be implemented"
+
+    email = request.form.get("email")
+    customer = model.get_customer_by_email(email)
+    # print customer
+
+    if not customer:
+        flash("Username or password is wrong. Please try again.")
+        return redirect("/login")
+    else:
+        flash("Welcome back!")
+        session["customer"] = customer
+        print session
+        return redirect("/login")
+
 
 
 @app.route("/checkout")

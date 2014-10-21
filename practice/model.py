@@ -20,10 +20,10 @@ class Melon(object):
 
 class Customer(object):
     """A wrapper object (??) that corresponds to rows in the customers table."""
-    def __init__(self, email, password, givenname):
+    def __init__(self, email, givenname, surname):
       self.email = email
-      self.password = password
       self.givenname = givenname
+      self.surname = surname
 
 def connect():
     conn = sqlite3.connect("melons.db")
@@ -51,7 +51,7 @@ def get_melons():
 
         melons.append(melon)
 
-    print melons
+    # print melons
 
     return melons
 
@@ -82,4 +82,5 @@ def get_customer_by_email(email):
             WHERE email = ?"""
     cursor.execute(query, (email, ))
     row = cursor.fetchone()
+    # print row[0], row[1], row[2]
     return row

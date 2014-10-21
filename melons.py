@@ -70,6 +70,8 @@ def add_to_cart(id):
 
 @app.route("/login", methods=["GET"])
 def show_login():
+    if "customer" in session:
+        del session["customer"]
     return render_template("login.html")
 
 
@@ -85,11 +87,11 @@ def process_login():
 
     if customer:
         session["customer"] = customer
-    print session
-
-    flash("Successfully logged in")
-    return redirect("/melons")
-    # return render_template("index.html", login_status="Log out")
+        flash("Successfully logged in")
+        return redirect("/melons")
+    else:
+        flash("Username not found")
+        return redirect("/login")
 
 
 @app.route("/checkout")

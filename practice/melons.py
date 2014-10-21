@@ -34,16 +34,15 @@ def shopping_cart():
     list held in the session that contains all the melons to be added. Check
     accompanying screenshots for details."""
     melons_in_cart = []
+    total = 0
 
     if "cart" in session:
         for id in session["cart"]:
             melon = model.get_melon_by_id(id)
-            print melon
             melons_in_cart.append(melon)
+            total += (melon.price * session["cart"][id])
 
-    print melons_in_cart
-
-    return render_template("cart.html", melons = melons_in_cart)
+    return render_template("cart.html", melons = melons_in_cart, total = total)
 
 @app.route("/add_to_cart/<int:id>")
 def add_to_cart(id):

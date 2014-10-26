@@ -13,7 +13,8 @@ def home():
 @app.route("/melons")
 def show_all_melons():
 	pass
-	return render_template("all_melons.html", melons)
+	melon_list = model.get_all_melons()
+	return render_template("all_melons.html", melon_list = melon_list)
 
 
 

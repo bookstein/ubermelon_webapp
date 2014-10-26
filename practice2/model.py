@@ -9,8 +9,9 @@ def connect_to_DB():
 	DB = CONN.cursor()
 
 def get_all_melons():
-	connect_to_db()
+	connect_to_DB()
 	query = """SELECT * from melons LIMIT 30"""
 	DB.execute(query)
 	melons = DB.fetchall()
 	CONN.close()
+	return melons

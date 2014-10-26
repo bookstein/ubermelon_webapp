@@ -6,7 +6,13 @@ app = Flask(__name__)
 def home():
 	return render_template("index.html")
 
+@app.route("/melons")
+def show_all_melons():
+	pass
+	query = """
+	"""
 
+	return render_template("all_melons.html", )
 
 
 

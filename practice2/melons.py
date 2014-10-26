@@ -1,6 +1,10 @@
 from flask import Flask, render_template, redirect
+import model
 
 app = Flask(__name__)
+
+CONN = None
+DB = None
 
 @app.route("/")
 def home():
@@ -9,10 +13,7 @@ def home():
 @app.route("/melons")
 def show_all_melons():
 	pass
-	query = """
-	"""
-
-	return render_template("all_melons.html", )
+	return render_template("all_melons.html", melons)
 
 
 

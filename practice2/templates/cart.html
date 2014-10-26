@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block body %}
+<table class="table table-striped">
+    <tr>
+    	<th>Melon Name</th>
+    	<th>Quantity</th>
+    	<th>Price</th>
+    	<th>Total</th>
+    </tr>
+    {% for melon in melons %}
+    <tr>
+    	<td>{{ melon.common_name }}</td>
+    	<td>{{ session["cart"]["%s" | format(melon.id)] }}</td>
+    	<td>{{ melon.price }}</td>
+    	<td>{{ "$%.2f" | format(melon.price
+    		* session["cart"]["%s" | format(melon.id)]) }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<h3>Total: {{ "$%.2f" | format(total) }}</h3>
+<a href="/checkout" class="btn btn-large btn-primary">Check Out</a>
+{% endblock %}

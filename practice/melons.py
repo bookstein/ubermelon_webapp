@@ -81,7 +81,7 @@ def process_login():
         flash("Welcome back!")
         session["customer"] = customer
         print session
-        return redirect("/login")
+        return redirect("/melons")
 
 
 

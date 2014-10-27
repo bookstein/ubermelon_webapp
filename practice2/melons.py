@@ -16,6 +16,11 @@ def show_all_melons():
 	melon_list = model.get_all_melons()
 	return render_template("all_melons.html", melon_list = melon_list)
 
+@app.route("/melon/<int:id>")
+def show_melon_details(id):
+	melon_info = model.get_melon_by_id(id)
+	print melon_info
+	return render_template("melon_details.html", display_melon = melon_info)
 
 
 if __name__ == "__main__":

@@ -53,7 +53,7 @@ def get_melon_by_id(id):
 
 	melon = DB.fetchone()
 	m = Melon(melon[0], melon[1], melon[2], melon[3], melon[4])
-	print m
+	# print m
 	return m
 
 

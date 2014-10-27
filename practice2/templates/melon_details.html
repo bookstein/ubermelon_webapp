@@ -4,7 +4,7 @@
 <img class="product-img" src="{{display_melon.imgurl}}">
 <div class="cart well">
     <h3>Price per melon</h3>
-    <p> Display melon price here </p>
+    <p> {{ display_melon.price_str() }} </p>
     <a class="btn btn-primary" href="/add_to_cart/{{display_melon.id}}">Add to Cart</a>
 </div>
 <div class="melon-details">
